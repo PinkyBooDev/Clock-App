@@ -6,16 +6,7 @@
 const timerButton = document.getElementById('timerButton');
 const hero = document.getElementById("main");
 
-//Chronometer Functions & variables
-var currentChronometer;
-var currentButton;
-var chronometerMinutesValue = 0;
-var chronometerSecondsValue = 0;
-var chronometerSecondsSpan = document.getElementById("chronometerSeconds");
-var chronometerMinutesSpan = document.getElementById('chronometerMinutes');
-
-console.log(chronometerSecondsSpan)
-console.log(chronometerMinutesSpan)
+//Chronometer Functions
 function formatValue(value) {
   return ("0" + value).slice(-2);
 }
@@ -49,10 +40,13 @@ function resetChronometer() {
   chronometerSecondsSpan.textContent = "00";
 }
 
-var chronometerSecondsSpan = document.getElementById("chronometerSeconds");
-var chronometerMinutesSpan = document.getElementById('chronometerMinutes');
-
 function chronometerSection () {
+  let chronometerSecondsSpan = document.getElementById("chronometerSeconds");
+  let chronometerMinutesSpan = document.getElementById('chronometerMinutes');
+  let currentChronometer;
+  let currentButton;
+  let chronometerMinutesValue = 0;
+  let chronometerSecondsValue = 0;
   hero.innerHTML = `
       <h1 class="heroTitle">Chronometer</h1>
       <div class="heroTime">
@@ -63,8 +57,7 @@ function chronometerSection () {
         <button onclick="stopChronometer()" class="button heroButton" type="button">Stop</button>
         <button onclick="resetChronometer()" class="button heroButton" type="button">Reset</button>
       </div>
-    `;
-
+      `;
 }
 
 //timer
