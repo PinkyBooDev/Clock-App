@@ -1,0 +1,161 @@
+/* Default Settings */
+:root {
+  /* fonts */
+  --RobotoFont: 'Roboto', sans-serif;
+  /* colours */
+  --bgColor: #121F3D;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  background-color: var(--bgColor);
+  color: wheat;
+  font-family: var(--RobotoFont);
+  font-size: 1.6rem;
+}
+
+button {
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* Main */
+
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  position: absolute;
+  top: 40%;
+}
+
+
+.headerButton {
+  width: 10rem;
+  font-size: 2rem;
+  height: 5rem;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 1rem;
+  color: black;
+  transition: 0.5s;
+}
+
+.headerButton:focus, .headerButton:active {
+  width: 5rem;
+  border-color: black;
+  border-radius: 3rem;
+  border-width: 2px;
+  font-size: 2.5rem;
+}
+
+.headerList {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+/* main */
+.hero {
+  text-align: center;
+  width: 100%;
+}
+
+.heroTitle {
+  position: relative;
+  bottom: 5rem;
+  text-decoration: underline;
+  font-size: 2.6rem;
+}
+
+.heroTime {
+  margin: 1rem;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.heroButtons {
+  width: 10%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heroButton {
+  width: 100%;
+  height: 2rem;
+  background-color: aliceblue;
+  border: 1px solid black;
+  border-radius: 0 1rem 0 1rem;
+}
+
+.heroButton:hover {
+  background-color: #eee;
+}
+
+footer {
+  display: block;
+  width: 100%;
+  height: 5rem;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+footer a {
+  color: white;
+}
+
+.hoverUnderline {
+  display: inline-block;
+  position: relative;
+  color: white;
+}
+
+.hoverUnderline:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hoverUnderline:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
