@@ -3,35 +3,37 @@
 // clearInterval
 
 //buttons
-const timerButton = document.getElementById('chronometerButton');
+const timerButton = document.getElementById('timerButton');
 const hero = document.getElementById("main");
 
-// chronometer
-let secondsSpan = document.getElementById("seconds");
-let minutesSpan = document.getElementById('minutes');
+//Chronometer Functions & variables
+var currentChronometer;
+var currentButton;
+var chronometerMinutesValue = 0;
+var chronometerSecondsValue = 0;
+var chronometerSecondsSpan = document.getElementById("chronometerSeconds");
+var chronometerMinutesSpan = document.getElementById('chronometerMinutes');
 
-let minutesValue = 0;
-let secondsValue = 0;
-let currentChronometer;
-let currentButton;
+console.log(chronometerSecondsSpan)
+console.log(chronometerMinutesSpan)
+function formatValue(value) {
+  return ("0" + value).slice(-2);
+}
 
 function startChronometer() {
   currentButton = event.target;
   currentButton.disabled = true;
   currentChronometer = setInterval(() => {
-    secondsValue += 1;
-    if (secondsValue === 60) {
-      secondsValue = 0;
-      minutesValue += 1;
-      minutesSpan.textContent = formatValue(minutesValue);
+    chronometerSecondsValue += 1;
+    if (chronometerSecondsValue === 60) {
+      chronometerSecondsValue = 0;
+      chronometerMinutesValue += 1;
+      chronometerMinutesSpan.textContent = formatValue(chronometerMinutesValue);
     }
-    secondsSpan.textContent = formatValue(secondsValue);
+    chronometerSecondsSpan.textContent = formatValue(chronometerSecondsValue);
   }, 20)
 }
 
-function formatValue(value) {
-  return ("0" + value).slice(-2);
-}
 
 function stopChronometer() {
   console.log("TIME STOP!");
@@ -41,32 +43,38 @@ function stopChronometer() {
 
 function resetChronometer() {
   stopChronometer();
-  secondsValue = 0;
-  minutesValue = 0;
-  minutesSpan.textContent = "00";
-  secondsSpan.textContent = "00";
+  chronometerSecondsValue = 0;
+  chronometerMinutesValue = 0;
+  chronometerMinutesSpan.textContent = "00";
+  chronometerSecondsSpan.textContent = "00";
 }
 
-function startTimer() {
-  event.preventDefault();
-}
+var chronometerSecondsSpan = document.getElementById("chronometerSeconds");
+var chronometerMinutesSpan = document.getElementById('chronometerMinutes');
 
-function executeAppFunction(button) {
-  if (button == "Chronometer") {
-    hero.innerHTML = `
+function chronometerSection () {
+  hero.innerHTML = `
       <h1 class="heroTitle">Chronometer</h1>
       <div class="heroTime">
-        <p id="time"><span id="minutes">00</span>:<span id="seconds">00</span></p>
+        <p id="time"><span id="chronometerMinutes">00</span>:<span id="chronometerSeconds">00</span></p>
       </div>
       <div class="heroButtons">
         <button onclick="startChronometer()" class="button heroButton" type="button">Start</button>
         <button onclick="stopChronometer()" class="button heroButton" type="button">Stop</button>
         <button onclick="resetChronometer()" class="button heroButton" type="button">Reset</button>
       </div>
-    `
-  } else if (button == "Timer") {
-      hero.innerHTML = `
-        <h1 class="heroTitle">${button}</h1>
+    `;
+
+}
+
+//timer
+function startTimer() {
+  event.preventDefault();
+}
+
+function timerSection () {
+  hero.innerHTML = `
+        <h1 class="heroTitle">${section}</h1>
         <div class="heroTime">
           <p id="time"><span id="minutes">00</span>:<span id="seconds">00</span></p>
         </div>
@@ -78,7 +86,4 @@ function executeAppFunction(button) {
           </form>
         </div>
       `
-  let secondsSpan = document.getElementById("seconds");
-  let minutesSpan = document.getElementById('minutes');
-  };
 }
