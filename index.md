@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/f2c415983f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="./src/styles/index.css">
   <title>Timer by @PinkyBooDev</title>
 </head>
 <body>
@@ -39,7 +39,7 @@
     <h3>Welcome to your personal clock app. Choice one of the options to start!</h3>
     <p>Made by <span class="hoverUnderline"><a href="https://github.com/PinkyBooDev" target="_blank">PinkyBooDev</a></span></p>
   </footer>
-  <script src="../javascript/index.js"></script>
+  <script src="./src/javascript/index.js"></script>
 </body>
 
 </html>
