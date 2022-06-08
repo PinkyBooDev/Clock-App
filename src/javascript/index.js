@@ -1,82 +1,143 @@
-// setInterval 
-// setTimeout
-// clearInterval
-
-//buttons
-const timerButton = document.getElementById('timerButton');
-const hero = document.getElementById("main");
-
-//Chronometer Functions
-function formatValue(value) {
-  return ("0" + value).slice(-2);
-}
+let secondsSpan = document.querySelector("#seconds");
+let minutesSpan = document.querySelector("#minutes");
+const timerButton = document.querySelector("#timerButton");
+const hero = document.querySelector("#main");
+let secondsValue = 0;
+let minutesValue = 0;
+let currentInterval;
+let currentButton;
 
 function startChronometer() {
   currentButton = event.target;
   currentButton.disabled = true;
-  currentChronometer = setInterval(() => {
-    chronometerSecondsValue += 1;
-    if (chronometerSecondsValue === 60) {
-      chronometerSecondsValue = 0;
-      chronometerMinutesValue += 1;
-      chronometerMinutesSpan.textContent = formatValue(chronometerMinutesValue);
+  currentInterval = setInterval(() => {
+  secondsValue += 1;
+  if (secondsValue === 60) {
+      secondsValue = 0;
+      minutesValue += 1;
+      minutesSpan.textContent = formatValue(minutesValue);
     }
-    chronometerSecondsSpan.textContent = formatValue(chronometerSecondsValue);
-  }, 20)
+    secondsSpan.textContent = formatValue(secondsValue);
+    }, 1000);
 }
 
+function formatValue(value) {
+  return ("0" + value).slice(-2);
+}
 
 function stopChronometer() {
-  console.log("TIME STOP!");
-  currentButton.disabled = false;
-  clearInterval(currentChronometer);
+  if (currentButton) {
+    currentButton.disabled = false;
+  }
+  clearInterval(currentInterval);
+  console.log("TIME STOP!")
 }
 
 function resetChronometer() {
   stopChronometer();
-  chronometerSecondsValue = 0;
-  chronometerMinutesValue = 0;
-  chronometerMinutesSpan.textContent = "00";
-  chronometerSecondsSpan.textContent = "00";
+  secondsValue = 0;
+  minutesValue = 0;
+  secondsSpan.textContent = "00";
+  minutesSpan.textContent = "00";
 }
 
-function chronometerSection () {
-  let chronometerSecondsSpan = document.getElementById("chronometerSeconds");
-  let chronometerMinutesSpan = document.getElementById('chronometerMinutes');
-  let currentChronometer;
-  let currentButton;
-  let chronometerMinutesValue = 0;
-  let chronometerSecondsValue = 0;
+function executeChronometer() {
   hero.innerHTML = `
-      <h1 class="heroTitle">Chronometer</h1>
-      <div class="heroTime">
-        <p id="time"><span id="chronometerMinutes">00</span>:<span id="chronometerSeconds">00</span></p>
-      </div>
-      <div class="heroButtons">
-        <button onclick="startChronometer()" class="button heroButton" type="button">Start</button>
-        <button onclick="stopChronometer()" class="button heroButton" type="button">Stop</button>
-        <button onclick="resetChronometer()" class="button heroButton" type="button">Reset</button>
-      </div>
-      `;
+  <h1 class=heroTitle>Chronometer</h1>
+  <div class="heroTime">
+    <p id="time"><span id="minutes">00</span>:<span id="seconds">00</span></p>
+  </div>
+  <div class="heroButtons">
+    <button onclick="startChronometer()" class="button heroButton" type="button">Start</button>
+    <button onclick="stopChronometer()" class="button heroButton" type="button">Stop</button>
+    <button onclick="resetChronometer()" class="button heroButton" type="button">Reset</button>
+  </div>
+  `;
+  secondsSpan = document.querySelector("#seconds");
+  minutesSpan = document.querySelector("#minutes");
 }
 
-//timer
+function executeTimer() {
+  hero.innerHTML = `
+    <h1 class=heroTitle>Timer</h1>
+    <div class="heroTime">
+      <p id="time"><span id="minutes">00</span>:<span id="seconds">00</span></p>
+    </div>
+    <div class="heroButtons">
+        <form onsubmit="startTimer()" >
+          <input type="number" placeholder="Escribe los minutos" id="minutesInput" name="minutes" > 
+          <input type="number" placeholder="Escribe los segundos" id="secondsInput" name="seconds" > 
+          <button type="submit">Start</button>
+        </form>
+    </div>
+  `;
+  secondsSpan = document.querySelector("#seconds");
+  minutesSpan = document.querySelector("#minutes");
+}
+
+function executePomodoro() {
+  hero.innerHTML = `
+    <h1 class=hero--title>Pomodoro</h1>
+    <div class="hero--time">
+      <p id="time"><span id="minutes">25</span>:<span id="seconds">00</span></p>
+    </div>
+    <div class="hero--buttons">
+      <button type="button" onclick="startPomodoro()" >start</button>
+    </div>
+  `;
+
+  secondsSpan = document.querySelector("#seconds");
+  minutesSpan = document.querySelector("#minutes");
+}
+
+function startPomodoro() {
+  secondsValue = 0;
+  minutesValue = 1;
+
+  currentInterval = setInterval(() => {
+    secondsValue -= 1;
+    if (secondsValue === -1) {
+      secondsValue = 59;
+      minutesValue -= 1;
+    }
+    if (minutesValue === 0 && secondsValue === 0) {
+      const container = document.querySelector(".heroTime");
+      const title = document.createElement("h2");
+      title.textContent = "El pomodoro a terminado";
+      document.title = "Se terminó el pomodoro";
+      container.appendChild(title);
+      clearInterval(currentInterval);
+      alert("Se acabo el pomodoro, (inserte sonido aqui)");
+    }
+    minutesSpan.textContent = formatValue(minutesValue);
+    secondsSpan.textContent = formatValue(secondsValue);
+  }, 1000);
+}
+
 function startTimer() {
   event.preventDefault();
-}
+  const minutes = parseInt(event.target.minutes.value);
+  const seconds = parseInt(event.target.seconds.value);
 
-function timerSection () {
-  hero.innerHTML = `
-        <h1 class="heroTitle">${section}</h1>
-        <div class="heroTime">
-          <p id="time"><span id="minutes">00</span>:<span id="seconds">00</span></p>
-        </div>
-        <div class="heroButtons">
-          <form onSubmit="startTimer()">
-            <input type="number" placeholder="Write the minutes" id="minutesInput" min="0"/>
-            <input type="number" placeholder="Write the seconds" id="secondsInput" min="0"/>
-            <button type="submit" >Start</button>
-          </form>
-        </div>
-      `
+  minutesSpan.textContent = minutes;
+  secondsSpan.textContent = seconds;
+  secondsValue = seconds;
+  minutesValue = minutes;
+
+  currentInterval = setInterval(() => {
+    secondsValue -= 1;
+    if (secondsValue === -1) {
+      secondsValue = 59;
+      minutesValue -= 1;
+    }
+    if (minutesValue === 0 && secondsValue === 0) {
+      const container = document.querySelector(".hero--time");
+      const title = document.createElement("h2");
+      title.textContent = "El timer a terminado";
+      container.appendChild(title);
+      clearInterval(currentInterval);
+    }
+    minutesSpan.textContent = formatValue(minutesValue);
+    secondsSpan.textContent = formatValue(secondsValue);
+  }, 1000);
 }

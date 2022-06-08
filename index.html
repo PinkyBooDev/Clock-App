@@ -5,27 +5,28 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./src/styles/index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/f2c415983f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./src/styles/index.css">
-  <title>Timer by @PinkyBooDev</title>
+  <title>Timer</title>
 </head>
+
 <body>
   <header>
     <nav class="headerNav">
       <ul class="headerList">
         <li>
-          <button class="button headerButton" id="chronometerButton" onclick="chronometerSection()"
+          <button class="button headerButton" id="chronometerButton" onclick="executeChronometer()"
             title="Chronometer"><i class="fa-solid fa-clock"></i></button>
         </li>
         <li>
-          <button class="button headerButton " id="timerButton" title="Timer" onclick="executeAppFunction('Timer')"><i
+          <button class="button headerButton " id="timerButton" title="Timer" onclick="executeTimer()"><i
               class="fa-solid fa-hourglass"></i></button>
         </li>
         <li>
-          <button class="button headerButton " title="Alarms" onclick="executeAppFunction('Alarms')"><i
+          <button class="button headerButton " title="Alarms" onclick="executePomodoro()"><i
               class="fa-solid fa-bell"></i></button>
         </li>
       </ul>
@@ -33,10 +34,19 @@
   </header>
   <main>
     <section class="hero" id="main">
+      <h1 class="heroTitle">Chronometer</h1>
+      <div class="heroTime">
+        <p id="time"><span id="minutes">00</span>:<span id="seconds">00</span></p>
+      </div>
+      <div class="heroButtons">
+        <button onclick="startChronometer()" class="button heroButton" type="button">Start</button>
+        <button onclick="stopChronometer()" class="button heroButton" type="button">Stop</button>
+        <button onclick="resetChronometer()" class="button heroButton" type="button">Reset</button>
+      </div>
     </section>
   </main>
   <footer>
-    <h3>Welcome to your personal clock app. Choice one of the options to start!</h3>
+    <h3>Welcome to your personal clock app. Choose one of the options to start!</h3>
     <p>Made by <span class="hoverUnderline"><a href="https://github.com/PinkyBooDev" target="_blank">PinkyBooDev</a></span></p>
   </footer>
   <script src="./src/javascript/index.js"></script>
